@@ -56,4 +56,11 @@ private void parseArgument(String arg) throws ArgsException {
 ```
 The call in the if should have been to `parseElements`. IntelliJ had helpfully pointed out that the method with the typo
 couldn't throw, and greyed out `ArgsException`. I tried to find the inspection to crank this up to an error 
-notification, sadly to no avail. Seems a good one. I wonder if Java has a strict mode ala Typescript? 
+notification, sadly to no avail. Seems a good one. I wonder if Java has a strict mode ala Typescript?
+
+### ArgumentMarshaller
+
+I can't seem to find a code repo for this book, so I don't have the JUint tests he mentions. I'm also not sure how to
+look for the FitNesse tests, although I did download and run [FitNesse](http://fitnesse.org/) itself, which looks 
+really cool. 
+
