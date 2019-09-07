@@ -70,3 +70,8 @@ This was simple and I was able figure out most of it without referring back to t
 time by copying and pasting the implementation of `getString` from `getBoolean` without changing `booleanArgs` to 
 `stringArgs`, but I figured it out by following the execution by eye. Let's see how long until I have to figure out
 the debugger...
+
+### Integer Arguments
+
+I tried this on my own and got most of it, besides checking if there should be a default return value for 
+`getInteger`. 
