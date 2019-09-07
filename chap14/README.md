@@ -62,5 +62,11 @@ notification, sadly to no avail. Seems a good one. I wonder if Java has a strict
 
 I can't seem to find a code repo for this book, so I don't have the JUint tests he mentions. I'm also not sure how to
 look for the FitNesse tests, although I did download and run [FitNesse](http://fitnesse.org/) itself, which looks 
-really cool. 
+really cool.
 
+### String Arguments
+ 
+This was simple and I was able figure out most of it without referring back to the test. I did screw it up the first
+time by copying and pasting the implementation of `getString` from `getBoolean` without changing `booleanArgs` to 
+`stringArgs`, but I figured it out by following the execution by eye. Let's see how long until I have to figure out
+the debugger...

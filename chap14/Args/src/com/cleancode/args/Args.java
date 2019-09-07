@@ -9,7 +9,7 @@ public class Args {
     private boolean valid = true;
     private Set<Character> unexpectedArguments = new TreeSet<Character>();
     private Map<Character, ArgumentMarshaller> booleanArgs = new HashMap<Character, ArgumentMarshaller>();
-    private Map<Character, String> stringArgs = new HashMap<Character, String>();
+    private Map<Character, ArgumentMarshaller> stringArgs = new HashMap<Character, ArgumentMarshaller>();
     private Map<Character, Integer> intArgs = new HashMap<Character, Integer>();
     private Set<Character> argsFound = new HashSet<Character>();
     private int currentArgument;
@@ -81,7 +81,7 @@ public class Args {
     }
 
     private void parseStringSchemaElement(char elementId) {
-        stringArgs.put(elementId, "");
+        stringArgs.put(elementId, new StringArgumentMarshaller());
     }
 
     private boolean isStringSchemaElement(String elementTail) {
@@ -165,7 +165,7 @@ public class Args {
     private void setStringArg(char argChar) throws ArgsException {
         currentArgument++;
         try {
-            stringArgs.put(argChar, args[currentArgument]);
+            stringArgs.get(argChar).setString(args[currentArgument]);
         } catch (ArrayIndexOutOfBoundsException e) {
             valid = false;
             errorArgumentId = argChar;
@@ -230,12 +230,9 @@ public class Args {
         return i == null ? 0 : i;
     }
 
-    private String blankIfNull(String s) {
-        return s == null ? "" : s;
-    }
-
     public String getString(char arg) {
-        return blankIfNull(stringArgs.get(arg));
+        Args.ArgumentMarshaller am = stringArgs.get(arg);
+        return am == null ? " " : am.getString();
     }
 
     public int getInt(char arg) {
@@ -260,6 +257,7 @@ public class Args {
 
     private class ArgumentMarshaller {
         private boolean booleanValue = false;
+        private String stringValue;
 
         public void setBoolean(boolean value) {
             booleanValue = value;
@@ -267,6 +265,14 @@ public class Args {
 
         public boolean getBoolean() {
             return booleanValue;
+        }
+
+        public void setString(String s) {
+            stringValue = s;
+        }
+
+        public String getString() {
+            return stringValue == null ? " " : stringValue;
         }
     }
 
