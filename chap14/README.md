@@ -98,3 +98,24 @@ This actually threw me a bit, because Bob didn't mention that the program won't 
 The upshot is, I leaned how to use the debugger, and how print a stack trace from a Java exception (which I added to 
 the driver). I also learned that Java will throw a null pointer exception if a method with a return type tries to
 return null, as the `getInt` method was before everything was in place.
+
+### Let's look at the whole picture again
+
+No code with this one, just my thoughts so far. One thing I've been thinking is how close the functions-do-one-thing
+principle is to the much-vaunted (by me) functional programming principle that a function body can only be one 
+expression. (Of course, the thing I like about FP langs is that it's the only way possible, and in langs like Java and
+JS  there's more than enough rope to hang yourself, the next programmer who has to work on it, the whole project, etc.)
+Clean code is clean code. 
+
+One thing I'll admit is that (and remember I typed this whole thing from the book, no copy-paste) I get in principle
+how the schema is parsed, but I couldn't give you the exact execution off the top of my head - in fact, when I was 
+running the debugger, I was actually getting lost in those parts of the code. It's a lot of string splitting and for
+loops, and my brain just goes, "Okay, we know what the input is and if we look at the next function we'll know what
+comes out, so this does that and if we need to figure out how later we'll just come back". This, I would actually say,
+is one of the goals of clean code in a real project environment. However, I do feel as though the parts of the app that
+are hazy made debugging harder. This also isn't helped by everything being in one big class still, but hopefully we'll
+fix that soon.
+
+I would also like to write some tests for this, because I think I can see pretty well what to check. But, since Bob
+doesn't give us the tests (or say we should write them), I'm going to hold off in the interests of keeping this repo
+as close to the book as possible.
