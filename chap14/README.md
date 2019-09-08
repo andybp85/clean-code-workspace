@@ -81,3 +81,9 @@ I tried this on my own and got most of it, besides checking if there should be a
 I'm not running any tests so I can't see exactly what Bob's seeing, but I couldn't even run the program until all the
 `ArgumentMarshaller`s had implemented the now-abstract methods, because the concrete marshallers no longer extended
 the abstract base properly. So, I'm not sure if tests would even run until this whole section is completed.
+
+### Use ArgumentMarshallers
+
+I made sure the driver still runs. We'll be getting rid of the `isxxxArg` functions soon, however I decided to put each
+step into its own commit to show exactly what's going on. Obviously I'll be making sure the drive still runs for each
+commit.
