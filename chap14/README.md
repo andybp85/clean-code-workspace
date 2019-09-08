@@ -91,3 +91,10 @@ commit.
 ### Eliminate duplicate calls to marshallers.get
 
 ### Inline isxxxArg methods
+
+### Use marshallers map in set functions
+
+This actually threw me a bit, because Bob didn't mention that the program won't run until we finish moving everything.
+The upshot is, I leaned how to use the debugger, and how print a stack trace from a Java exception (which I added to 
+the driver). I also learned that Java will throw a null pointer exception if a method with a return type tries to
+return null, as the `getInt` method was before everything was in place.

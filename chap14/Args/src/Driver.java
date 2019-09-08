@@ -10,6 +10,7 @@ class Driver {
             executeApplication(logging, port, directory);
         } catch (Exception e) {
             System.out.printf("Argument error: %s\n%s\n", e.getClass(), e.getMessage());
+            e.printStackTrace();
         }
     }
 
