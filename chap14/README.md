@@ -89,3 +89,5 @@ step into its own commit to show exactly what's going on. Obviously I'll be maki
 commit.
 
 ### Eliminate duplicate calls to marshallers.get
+
+### Inline isxxxArg methods

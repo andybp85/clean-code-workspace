@@ -134,20 +134,16 @@ public class Args {
 
     private boolean setArgument(char argChar) throws ArgsException {
         ArgumentMarshaller m = marshallers.get(argChar);
-        if (isBooleanArg(m))
+        if (m instanceof BooleanArgumentMarshaller)
             setBooleanArg(argChar);
-        else if (isStringArg(m))
+        else if (m instanceof StringArgumentMarshaller)
             setStringArg(argChar);
-        else if (isIntArg(m))
+        else if (m instanceof IntegerArgumentMarshaller)
             setIntArg(argChar);
         else
             return false;
 
         return true;
-    }
-
-    private boolean isIntArg(ArgumentMarshaller m) {
-        return m instanceof IntegerArgumentMarshaller;
     }
 
     private void setIntArg(char argChar) throws ArgsException {
@@ -182,19 +178,11 @@ public class Args {
         }
     }
 
-    private boolean isStringArg(ArgumentMarshaller m) {
-        return m instanceof StringArgumentMarshaller;
-    }
-
     private void setBooleanArg(char argChar) {
         try {
             booleanArgs.get(argChar).set("true");
         } catch (ArgsException e) {
         }
-    }
-
-    private boolean isBooleanArg(ArgumentMarshaller m) {
-        return m instanceof BooleanArgumentMarshaller;
     }
 
     public int cardinality() {
