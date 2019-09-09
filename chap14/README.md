@@ -119,3 +119,25 @@ fix that soon.
 I would also like to write some tests for this, because I think I can see pretty well what to check. But, since Bob
 doesn't give us the tests (or say we should write them), I'm going to hold off in the interests of keeping this repo
 as close to the book as possible.
+
+### Refactor setArgument to single call to ArgumentMarshaler.set
+
+Let's see about these 10 steps:
+
+1. Change `args` and `currentArg` to `argsList` and an `Iterator<String>`, and fix up dependant code.
+2. Refactor `setArgument`.
+3. Refactor `setBooleanArg`.
+4. Add net `set` in `ArgumentMarshaller`, update marshallers with empty method, implement in 
+`BooleanArgumentMarshaller`. Verify code runs.
+5. Move functionality from the other `setxxxArg` functions into marshaller methods and change `setArgument` call set
+methods.
+6. Remove type-case if/else from `setArgument`.
+7. Change `ArgumentMarshaller` to interface.
+
+That's all Bob gives us. Then I had to:
+
+8. Change `extends` to `implements` in relevant cases.
+9. Remove unused `setxxxArg` functions.
+10. Remove unused `set` methods.
+
+I'm not sure if these were the steps Bob had in mind, but hey, I had to do them.
