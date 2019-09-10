@@ -141,3 +141,46 @@ That's all Bob gives us. Then I had to:
 10. Remove unused `set` methods.
 
 I'm not sure if these were the steps Bob had in mind, but hey, I had to do them.
+
+### Add Double argument type
+
+Finally, JUnit! I used the instructions on [IntelliJ's Blog](https://www.jetbrains.com/help/idea/configuring-testing-libraries.html#create_test)
+to get set up, which was super painless. I let it create `ArgsTest` in the `Args` package root - I don't know how it's 
+usually set up with Java, and for my purposes as long as it runs I'm happy. I didn't let it create any method tests, so
+I wound up with an empty test class:
+
+```java
+package com.cleancode.args;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ArgsTest {
+
+}
+```
+
+I typed out the test method just like Bob has it, and made a quick stub of the method being tested in `Args`:
+
+```java
+public double getDouble(char arg) {
+    return 0.0;
+}
+```
+
+I then created a simple JUnit run configuration for `All tests in Package` and selected `com.cleancode.args` as the
+package. Hitting `Run` found no tests, so I took a guess that JUnit 5 needed an `@Test` annotation on the method (I
+noticed somewhere that annotations were a big feature), and it found the test and ran it, resulting in the exact error
+I expected:
+
+```
+java.text.ParseException: Argument: x has invalid format: ##.
+    at com.cleancode.args.Args.parseSchemaElement(Args.java:61)
+    at com.cleancode.args.Args.parseSchema(Args.java:43)
+    at com.cleancode.args.Args.parse(Args.java:31)
+    [...]
+```
+
+I then typed out the code for a `double` argument and the test passed first try. I also looked up how to get the test
+to run on changes, and turns out there's a `Toggle auto-test` button in IntelliJ's test runner (as opposed to having a
+`--watch` arg, like Jest). One thing that Bob doesn't mention specifically is that we've now inlined the 
+`isxxxSchemaElement` methods, so I deleted them. 
