@@ -204,3 +204,4 @@ earlier than was justified by the tests, but it sure helped readability!
 I'm going to break this up into several commits so my process is visible. I'll name the commits after the last test 
 implemented:
 1. testCreateWithNoSchemaButWithOneArgument
+2. testNonLetterSchema

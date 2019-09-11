@@ -51,8 +51,7 @@ public class Args {
 
     private void validateSchemaElementId(char elementId) throws ArgsException {
         if (!Character.isLetter(elementId)) {
-            throw new ArgsException(
-                    "Bad Charachter:" + elementId + "in Args format:" + schema);
+            throw new ArgsException(ArgsException.ErrorCode.INVALID_ARGUMENT_NAME, elementId, null);
         }
     }
 

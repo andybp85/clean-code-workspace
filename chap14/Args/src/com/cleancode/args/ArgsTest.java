@@ -25,6 +25,30 @@ class ArgsTest {
     }
 
     @Test
+    public void testCreateWithNoSchemaButWithMultipleArguments() throws Exception {
+        try {
+            new Args("", new String[]{"-x", "-y"});
+            fail();
+        } catch (ArgsException e) {
+            assertEquals(ArgsException.ErrorCode.UNEXPECTED_ARGUMENT,
+                    e.getErrorCode());
+            assertEquals('x', e.getErrorArgumentId());
+        }
+    }
+
+    @Test
+    public void testNonLetterSchema() throws Exception {
+        try {
+            new Args("*", new String[]{});
+            fail("Args constructor should have thrown exception");
+        } catch (ArgsException e) {
+            assertEquals(ArgsException.ErrorCode.INVALID_ARGUMENT_NAME,
+                    e.getErrorCode());
+            assertEquals('*', e.getErrorArgumentId());
+        }
+    }
+
+    @Test
     public void testSimpleDoublePresent() throws Exception {
         Args args = new Args("x##", new String[] {"-x", "42.3"});
         assertEquals(1, args.cardinality());
