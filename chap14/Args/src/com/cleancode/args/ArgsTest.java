@@ -113,6 +113,17 @@ class ArgsTest {
     }
 
     @Test
+    public void testMissingInteger() throws Exception {
+        try {
+            new Args("x#", new String[]{"-x"});
+            fail();
+        } catch (ArgsException e) {
+            assertEquals(ArgsException.ErrorCode.MISSING_INTEGER, e.getErrorCode());
+            assertEquals('x', e.getErrorArgumentId());
+        }
+    }
+
+    @Test
     public void testSimpleDoublePresent() throws Exception {
         Args args = new Args("x##", new String[] {"-x", "42.3"});
         assertEquals(1, args.cardinality());
@@ -120,4 +131,25 @@ class ArgsTest {
         assertEquals(42.3, args.getDouble('x'), .001);
     }
 
+    @Test
+    public void testInvalidDouble() throws Exception {
+        try {
+            new Args("x##", new String[]{"-x", "Forty Two"});
+            fail();
+        } catch (ArgsException e) {
+            assertEquals(ArgsException.ErrorCode.INVALID_DOUBLE, e.getErrorCode());
+            assertEquals('x', e.getErrorArgumentId());
+            assertEquals("Forty Two", e.getErrorParameter());
+        }
+    }
+
+    @Test
+    public void testMissingDouble() throws Exception {
+        try {
+            new Args("x##", new String[]{"-x"});
+        } catch (ArgsException e) {
+            assertEquals(ArgsException.ErrorCode.MISSING_DOUBLE, e.getErrorCode());
+            assertEquals('x', e.getErrorArgumentId());
+        }
+    }
 }

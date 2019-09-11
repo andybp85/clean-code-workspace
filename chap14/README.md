@@ -207,3 +207,4 @@ implemented:
 2. testNonLetterSchema
 3. testInvalidArgumentFormat
 4. testInvalidInteger
+5. testMissingDouble
