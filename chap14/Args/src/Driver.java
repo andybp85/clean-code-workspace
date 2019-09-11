@@ -1,4 +1,5 @@
 import com.cleancode.args.Args;
+import com.cleancode.args.ArgsException;
 
 class Driver {
     public static void main(String[] args) {
@@ -8,7 +9,7 @@ class Driver {
             int port = arg.getInt('p');
             String directory = arg.getString('d');
             executeApplication(logging, port, directory);
-        } catch (Exception e) {
+        } catch (ArgsException e) {
             System.out.printf("Argument error: %s\n%s\n", e.getClass(), e.getMessage());
             e.printStackTrace();
         }

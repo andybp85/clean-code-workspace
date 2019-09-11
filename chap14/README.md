@@ -184,3 +184,7 @@ I then typed out the code for a `double` argument and the test passed first try.
 to run on changes, and turns out there's a `Toggle auto-test` button in IntelliJ's test runner (as opposed to having a
 `--watch` arg, like Jest). One thing that Bob doesn't mention specifically is that we've now inlined the 
 `isxxxSchemaElement` methods, so I deleted them. 
+
+### ArgsException module
+
+Finally moving stuff out of the one giant class! This also let me use `ArgsException` in my driver.
