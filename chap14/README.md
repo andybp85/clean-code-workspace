@@ -188,3 +188,19 @@ to run on changes, and turns out there's a `Toggle auto-test` button in IntelliJ
 ### ArgsException module
 
 Finally moving stuff out of the one giant class! This also let me use `ArgsException` in my driver.
+
+### Merge exceptions into ArgsExceptions
+
+And finally, a bunch of tests! I originally started typing it straight away, but then I realized that the spirit of the
+exercise is to keep the tests passing. So I commented out everything but the first failing test 
+(`testCreateWithNoSchemaButWithOneArgument`) and then modified `Args` and `ArgsException` until it passed, then did the
+next test, and so on. Lots of flipping around, but it does feel like I understand what's going on far more than when I
+just typed everything out.
+
+I moved the `ArgumentMarshaller` classes out of `Args` using IntelliJ's "Refactor -> Move inner class to upper level". 
+I don't use Webstorm's refactoring tools nealy enough. I did do this pretty early in the process though, arguably 
+earlier than was justified by the tests, but it sure helped readability!
+
+I'm going to break this up into several commits so my process is visible. I'll name the commits after the last test 
+implemented:
+1. testCreateWithNoSchemaButWithOneArgument
