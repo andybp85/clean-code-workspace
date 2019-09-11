@@ -29,6 +29,14 @@ public class ArgsException extends Exception {
         this.errorArgumentId = errorArgumentId;
     }
 
+    public String getErrorParameter() {
+        return errorParameter;
+    }
+
+    public void setErrorParameter(String errorParameter) {
+        this.errorParameter = errorParameter;
+    }
+
     public ErrorCode getErrorCode() {
         return errorCode;
     }

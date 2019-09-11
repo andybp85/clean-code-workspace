@@ -60,6 +60,59 @@ class ArgsTest {
     }
 
     @Test
+    public void testSimpleBooleanPresent() throws Exception {
+        Args args = new Args("x", new String[]{"-x"});
+        assertEquals(1, args.cardinality());
+        assertEquals(true, args.getBoolean('x'));
+    }
+
+    @Test
+    public void testSimpleStringPresent() throws Exception {
+        Args args = new Args("x*", new String[]{"-x", "param"});
+        assertEquals(1, args.cardinality());
+        assertEquals("param", args.getString('x'));
+    }
+
+    @Test
+    public void testMissingStringArgument() throws Exception {
+        try {
+            new Args("x*", new String[]{"-x"});
+            fail();
+        } catch (ArgsException e) {
+            assertEquals(ArgsException.ErrorCode.MISSING_STRING, e.getErrorCode());
+            assertEquals('x', e.getErrorArgumentId());
+        }
+    }
+
+    @Test
+    public void testSpacesInFormat() throws Exception {
+        Args args = new Args("x, y", new String[]{"-xy"});
+        assertEquals(2, args.cardinality());
+        assertTrue(args.has('x'));
+        assertTrue(args.has('y'));
+    }
+
+    @Test
+    public void testSimpleIntPresent() throws Exception {
+        Args args = new Args("x#", new String[]{"-x", "42"});
+        assertEquals(1, args.cardinality());
+        assertTrue(args.has('x'));
+        assertEquals(42, args.getInt('x'));
+    }
+
+    @Test
+    public void testInvalidInteger() throws Exception {
+        try {
+            new Args("x#", new String[]{"-x", "Forty Two"});
+            fail();
+        } catch (ArgsException e) {
+            assertEquals(ArgsException.ErrorCode.INVALID_INTEGER, e.getErrorCode());
+            assertEquals('x', e.getErrorArgumentId());
+            assertEquals("Forty Two", e.getErrorParameter());
+        }
+    }
+
+    @Test
     public void testSimpleDoublePresent() throws Exception {
         Args args = new Args("x##", new String[] {"-x", "42.3"});
         assertEquals(1, args.cardinality());

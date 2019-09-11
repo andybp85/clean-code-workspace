@@ -206,3 +206,4 @@ implemented:
 1. testCreateWithNoSchemaButWithOneArgument
 2. testNonLetterSchema
 3. testInvalidArgumentFormat
+4. testInvalidInteger
