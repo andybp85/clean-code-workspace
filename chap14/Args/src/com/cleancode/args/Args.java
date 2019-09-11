@@ -44,9 +44,7 @@ public class Args {
         else if (elementTail.equals("##"))
             marshallers.put(elementId, new DoubleArgumentMarshaller());
         else
-            throw new ArgsException(
-                    String.format("Argument: %c has invalid format: %s.",
-                            elementId, elementTail));
+            throw new ArgsException(ArgsException.ErrorCode.INVALID_FORMAT, elementId, null);
     }
 
     private void validateSchemaElementId(char elementId) throws ArgsException {

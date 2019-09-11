@@ -205,3 +205,4 @@ I'm going to break this up into several commits so my process is visible. I'll n
 implemented:
 1. testCreateWithNoSchemaButWithOneArgument
 2. testNonLetterSchema
+3. testInvalidArgumentFormat

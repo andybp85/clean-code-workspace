@@ -49,6 +49,17 @@ class ArgsTest {
     }
 
     @Test
+    public void testInvalidArgumentFormat() throws Exception {
+        try {
+            new Args("f-", new String[]{});
+            fail("Args constructor should have thrown exception");
+        } catch (ArgsException e) {
+            assertEquals(ArgsException.ErrorCode.INVALID_FORMAT, e.getErrorCode());
+            assertEquals('f', e.getErrorArgumentId());
+        }
+    }
+
+    @Test
     public void testSimpleDoublePresent() throws Exception {
         Args args = new Args("x##", new String[] {"-x", "42.3"});
         assertEquals(1, args.cardinality());
