@@ -56,10 +56,16 @@ public class ArgsException extends Exception {
                 return String.format("Could not find string parameter for -%c",
                         errorArgumentId);
             case INVALID_INTEGER:
-                return String.format("Argument -%c expects an integer but was %s.",
+                return String.format("Argument -%c expects an integer but was '%s'",
                         errorArgumentId, errorParameter);
             case MISSING_INTEGER:
-                return String.format("Could not find integer parameter for -%c,",
+                return String.format("Could not find integer parameter for -%c",
+                        errorArgumentId);
+            case INVALID_DOUBLE:
+                return String.format("Argument -%c expects a double but was '%s'",
+                        errorArgumentId, errorParameter);
+            case MISSING_DOUBLE:
+                return String.format("Could not find double parameter for -%c",
                         errorArgumentId);
         }
         return "";

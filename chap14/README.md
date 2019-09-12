@@ -208,3 +208,7 @@ implemented:
 3. testInvalidArgumentFormat
 4. testInvalidInteger
 5. testMissingDouble
+
+### ArgsExceptionTest
+
+Finishing up the tests was pretty painless. I had to add the error messages for double, but this was obvious.
