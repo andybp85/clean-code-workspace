@@ -211,4 +211,15 @@ implemented:
 
 ### ArgsExceptionTest
 
-Finishing up the tests was pretty painless. I had to add the error messages for double, but this was obvious.
+Finishing up the tests was pretty painless. I had to add the error messages for double, but this was obvious.`
+
+### Final Refactor
+
+So I have to admit: Bob says to try the final refactor as an exercise, which I tried and gave up on pretty quickly. I
+did continuously run the tests while I was doing the refactor, and did figure out a few things myself, but mostly I 
+looked at the final version and made the changes in sequence. I do see what Bob had in mind though.
+
+I did hit one snag that took me a while: I couldn't get the drive to run! I finally realized that I had set the command
+line args up wrong initially: it should have been `-l -p 10 -d "hello"`. the extra `true` in it was getting parsed as
+arg, which caused the loop in `parseArgumentStrings` to break and resulted in a null pointer exception being thrown
+from the call to `getInt` (since there was no int). 

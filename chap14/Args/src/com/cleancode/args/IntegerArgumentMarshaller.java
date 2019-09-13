@@ -1,5 +1,6 @@
 package com.cleancode.args;
 
+import static com.cleancode.args.ArgsException.ErrorCode.*;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -12,13 +13,17 @@ class IntegerArgumentMarshaller implements ArgumentMarshaller {
             parameter = currentArgument.next();
             intValue = Integer.parseInt(parameter);
         } catch (NoSuchElementException e) {
-            throw new ArgsException(ArgsException.ErrorCode.MISSING_INTEGER, parameter);
+            throw new ArgsException(MISSING_INTEGER, parameter);
         } catch (NumberFormatException e) {
-            throw new ArgsException(ArgsException.ErrorCode.INVALID_INTEGER, parameter);
+            throw new ArgsException(INVALID_INTEGER, parameter);
         }
     }
 
-    public Integer get() {
-        return intValue;
+    public static int geValue(ArgumentMarshaller am) {
+        if (am != null && am instanceof IntegerArgumentMarshaller) {
+            return ((IntegerArgumentMarshaller) am).intValue;
+        } else {
+            return 0;
+        }
     }
 }

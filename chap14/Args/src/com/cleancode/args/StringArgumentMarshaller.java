@@ -1,5 +1,6 @@
 package com.cleancode.args;
 
+import static com.cleancode.args.ArgsException.ErrorCode.*;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -10,11 +11,15 @@ class StringArgumentMarshaller implements ArgumentMarshaller {
         try {
             stringValue = currentArgument.next();
         } catch (NoSuchElementException e) {
-            throw new ArgsException(ArgsException.ErrorCode.MISSING_STRING, stringValue);
+            throw new ArgsException(MISSING_STRING, stringValue);
         }
     }
 
-    public String get() {
-        return stringValue == null ? " " : stringValue;
+    public static String geValue(ArgumentMarshaller am) {
+        if (am != null && am instanceof StringArgumentMarshaller) {
+            return ((StringArgumentMarshaller) am).stringValue;
+        } else {
+            return "";
+        }
     }
 }

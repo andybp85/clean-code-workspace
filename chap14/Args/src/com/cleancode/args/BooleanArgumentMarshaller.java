@@ -9,7 +9,11 @@ class BooleanArgumentMarshaller implements ArgumentMarshaller {
         booleanValue = true;
     }
 
-    public Object get() {
-        return booleanValue;
+    public static boolean geValue(ArgumentMarshaller am) {
+        if (am != null && am instanceof BooleanArgumentMarshaller) {
+            return ((BooleanArgumentMarshaller) am).booleanValue;
+        } else {
+            return false;
+        }
     }
 }
