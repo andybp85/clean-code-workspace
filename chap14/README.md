@@ -222,4 +222,93 @@ looked at the final version and made the changes in sequence. I do see what Bob 
 I did hit one snag that took me a while: I couldn't get the drive to run! I finally realized that I had set the command
 line args up wrong initially: it should have been `-l -p 10 -d "hello"`. the extra `true` in it was getting parsed as
 arg, which caused the loop in `parseArgumentStrings` to break and resulted in a null pointer exception being thrown
-from the call to `getInt` (since there was no int). 
+from the call to `getInt` (since there was no int).
+
+### StringArrayArgumentMarshaller
+
+This isn't in the prose, however there's some code in the `Args` class at the beginning of the chapter, so I decided to
+go ahead and implement it.
+
+First I got `ArgsException` set up. I updated the test cases, which of course wouldn't even run at first because the
+class wouldn't compile. Implementing the messages was easy. Then I moved onto the `Args` class. This entailed writing
+the `StringArrayArgumentMarshaller` class, for which the code isn't given. Here's what I came up with:
+
+```java
+class StringArrayArgumentMarshaller implements ArgumentMarshaller {
+    private String[] stringArrayValue;
+
+    public void set(Iterator<String> currentArgument) throws ArgsException {
+        try {
+            stringArrayValue = currentArgument.next();
+        } catch (NoSuchElementException e) {
+            throw new ArgsException(MISSING_STRING_ARRAY, stringArrayValue.toString());
+        }
+    }
+
+    public static String[] geValue(ArgumentMarshaller am) {
+        if (am != null && am instanceof StringArgumentMarshaller) {
+            return ((StringArrayArgumentMarshaller) am).stringArrayValue;
+        } else {
+            return new String[]{};
+        }
+    }
+}
+```
+
+This didn't work, because `currentArgument.next()` produces a string. Looking around for a way to get a string as an
+array (ha!), I found something even better: Uncle Bob's [actual implementation](https://github.com/unclebob/javaargs/blob/master/src/com/cleancoder/args/StringArrayArgumentMarshaler.java)
+of `StringArrayArgumentMarshaler`! Since my goal here isn't to really learn Java I decided to just use what he made,
+with some modifications.
+
+```java
+class StringArrayArgumentMarshaller implements ArgumentMarshaller {
+    private List<String> strings = new ArrayList<String>();
+
+    public void set(Iterator<String> currentArgument) throws ArgsException {
+        try {
+            strings.add(currentArgument.next());
+        } catch (NoSuchElementException e) {
+            throw new ArgsException(MISSING_STRING_ARRAY, strings.toString());
+        }
+    }
+
+    public static String[] getValue(ArgumentMarshaller am) {
+        if (am != null && am instanceof StringArrayArgumentMarshaller)
+            return ((StringArrayArgumentMarshaller) am).strings.toArray(new String[0]);
+        else
+            return new String[0];
+    }
+}
+```
+
+(I'm pretty sure `strings.toString()` isn't the best debugging output for this, but `Arrays.toString` didn't work and
+this is just an exercise.)
+
+Almost! I had made tests for `testMissingStringArray` and `testInvalidStringArray`, but I couldn't get
+`testInvalidStringArray` to pass. so I decided to update my driver to test the functionality:
+
+```java
+class Driver {
+    public static void main(String[] args) {
+        try {
+            Args arg = new Args("l,p#,d*,a[*]", args);
+            boolean logging = arg.getBoolean('l');
+            int port = arg.getInt('p');
+            String[] array = arg.getStringArray('a');
+            String directory = arg.getString('d');
+            executeApplication(logging, port, directory, array);
+        } catch (ArgsException e) {
+            System.out.printf("Argument error: %s\n%s\n", e.getClass(), e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private static void executeApplication(boolean logging, int port, String directory, String[] array){
+        System.out.printf("Args: %b %d %s %s\n", logging, port, directory, Arrays.toString(array));
+    }
+}
+``` 
+
+Running it with the args `-l -p 10 -d "hello" -a "Forty","Two"` worked, and I got back
+`Args: true 10 hello [Forty,Two]`. Woot. I then tried it with `-a "Forty"`, and got back `[Forty]`. So I could infer
+that any string argument would work fine, and removed the test. All my tests passed!

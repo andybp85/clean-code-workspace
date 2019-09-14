@@ -48,4 +48,18 @@ class ArgsExceptionTest {
                 'x', null);
         assertEquals("Could not find double parameter for -x", e.errorMessage());
     }
+
+    @Test
+    public void testInvalidStringArrayMessage() throws Exception {
+        ArgsException e = new ArgsException(ArgsException.ErrorCode.INVALID_STRING_ARRAY,
+                'x', "Forty Two");
+        assertEquals("Argument -x expects a string array but was 'Forty Two'", e.errorMessage());
+    }
+
+    @Test
+    public void testMissingStringArrayMessage() throws Exception {
+        ArgsException e = new ArgsException(ArgsException.ErrorCode.MISSING_STRING_ARRAY,
+                'x', null);
+        assertEquals("Could not find string array parameter for -x", e.errorMessage());
+    }
 }

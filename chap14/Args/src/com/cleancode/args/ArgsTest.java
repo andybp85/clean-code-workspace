@@ -152,4 +152,14 @@ class ArgsTest {
             assertEquals('x', e.getErrorArgumentId());
         }
     }
+
+    @Test
+    public void testMissingStringArray() throws Exception {
+        try {
+            new Args("x[*]", new String[]{"-x"});
+        } catch (ArgsException e) {
+            assertEquals(ArgsException.ErrorCode.MISSING_STRING_ARRAY, e.getErrorCode());
+            assertEquals('x', e.getErrorArgumentId());
+        }
+    }
 }

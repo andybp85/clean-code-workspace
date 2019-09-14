@@ -67,12 +67,19 @@ public class ArgsException extends Exception {
             case MISSING_DOUBLE:
                 return String.format("Could not find double parameter for -%c",
                         errorArgumentId);
+            case INVALID_STRING_ARRAY:
+                return String.format("Argument -%c expects a string array but was '%s'",
+                        errorArgumentId, errorParameter);
+            case MISSING_STRING_ARRAY:
+                return String.format("Could not find string array parameter for -%c",
+                        errorArgumentId);
         }
         return "";
     }
 
     public enum ErrorCode {
         OK, MISSING_STRING, MISSING_INTEGER, INVALID_INTEGER, UNEXPECTED_ARGUMENT,
-        MISSING_DOUBLE, INVALID_DOUBLE, INVALID_ARGUMENT_NAME, INVALID_FORMAT
+        MISSING_DOUBLE, INVALID_DOUBLE, INVALID_ARGUMENT_NAME, INVALID_FORMAT,
+        INVALID_STRING_ARRAY, MISSING_STRING_ARRAY
     }
 }

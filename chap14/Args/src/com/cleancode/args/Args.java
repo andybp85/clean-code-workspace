@@ -35,6 +35,8 @@ public class Args {
             marshallers.put(elementId, new IntegerArgumentMarshaller());
         else if (elementTail.equals("##"))
             marshallers.put(elementId, new DoubleArgumentMarshaller());
+        else if (elementTail.equals("[*]"))
+            marshallers.put(elementId, new StringArrayArgumentMarshaller());
         else
             throw new ArgsException(INVALID_FORMAT, elementId, null);
     }
@@ -102,5 +104,9 @@ public class Args {
 
     public double getDouble(char arg) {
         return DoubleArgumentMarshaller.geValue(marshallers.get(arg));
+    }
+
+    public String[] getStringArray(char arg) {
+        return StringArrayArgumentMarshaller.getValue(marshallers.get(arg));
     }
 }
