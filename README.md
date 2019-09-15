@@ -1,4 +1,4 @@
-# clean-code-workspace
+# Clean Code Workspace
 
 This is my repo for working through Uncle Bob's classic [Clean Code: A Handbook of Agile Software Craftsmanship](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
 
