@@ -55,3 +55,7 @@ Bob makes a bunch of small changes here, so I'll break this up into commits that
 #### eliminate the f prefixes
 I used IntelliJ's refactoring tool to change the names in the declarations, and low and behold, it inserted `this`
 pointers where they were needed. As a web dev, I have to say that so far the lack of `this`s everywhere has been novel.
+
+#### unencapsulated conditional
+I don't think I've every used the `extract method` tool in WebStorm, so this was the perfect opportunity to give it a
+whirl. It made the exact same method Bob did. Awesome!
