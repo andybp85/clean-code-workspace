@@ -75,3 +75,6 @@ having to read the definition.
 
 #### fix hidden temporal coupling in findCommonSuffix()
 We're about to undo this, but I'm including it for completeness.
+
+#### better temporal coupling fix with findCommonPrefixAndSuffix()
+And there go the return values I liked. Of course it makes sense though.
