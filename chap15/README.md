@@ -66,3 +66,5 @@ thing, because I forgot to change the `||`s to `&&`s the first time.
 
 I really appreciate this refactor. The result of inverting the conditional is something I strive to do in my own code
 day-to-day.
+
+#### change compact() to formatCompactedComparison()
