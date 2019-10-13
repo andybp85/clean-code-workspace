@@ -59,3 +59,10 @@ pointers where they were needed. As a web dev, I have to say that so far the lac
 #### unencapsulated conditional
 I don't think I've every used the `extract method` tool in WebStorm, so this was the perfect opportunity to give it a
 whirl. It made the exact same method Bob did. Awesome!
+
+#### refactor compact()
+I should have had the tests running on changes, but I'll forgot and this was the first time I felt it necessary - good
+thing, because I forgot to change the `||`s to `&&`s the first time.
+
+I really appreciate this refactor. The result of inverting the conditional is something I strive to do in my own code
+day-to-day.
