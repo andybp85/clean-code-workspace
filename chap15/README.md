@@ -68,3 +68,7 @@ I really appreciate this refactor. The result of inverting the conditional is so
 day-to-day.
 
 #### change compact() to formatCompactedComparison()
+
+#### change findCommonPrefix() and findCommonSuffix() to use consistent conventions
+This is another one I really like, because it gives the reader a better idea of what the function is doing without
+having to read the definition.
