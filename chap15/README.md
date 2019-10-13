@@ -72,3 +72,6 @@ day-to-day.
 #### change findCommonPrefix() and findCommonSuffix() to use consistent conventions
 This is another one I really like, because it gives the reader a better idea of what the function is doing without
 having to read the definition.
+
+#### fix hidden temporal coupling in findCommonSuffix()
+We're about to undo this, but I'm including it for completeness.
