@@ -15,4 +15,35 @@ which is deprecated. I looked around quickly for what the current version would 
 page of a google search. As I've said my goal isn't to learn Java, so since everything runs I'm going to roll with it
 for now. YMMV.
 
-### The JUnit Framework 
+### The JUnit Framework
+
+Bob invites us to critique the tests first. IntelliJ only suggests one change: the `assertTrue` in the first test can
+be simplified to `assertEquals()`. The rest of the tests utilize `assertEquals()` and the simplified test passes, so
+that's pretty obvious.
+
+That brings up another observation: all the tests rely on `compact()` to return a string, so if you wanted to change
+the implementation to return say an object, you'd have to change each individual test. I think I'd abstract out the
+assertion so you could pass in the result and the expected, and then if the implementation changes you'd have to make a
+lot fewer changes.
+
+This test makes no sense to me:
+
+```java
+public void testSame() {
+    String failure = new ComparisonCompactor(1, "ab", "ab").compact(null);
+    assertEquals("expected:<ab> but was:<ab>", failure);
+}
+```
+
+In all the others, it's obvious that the `expected` doesn't match the `actual`, but these are the same, so I'm not sure
+why it's not what's expected. I thought maybe `contextLength` had something to do with it, but varying it between 0 and
+3 didn't fail the test. To make sure the tests are actually running, I changed some of the test strings and they failed
+the tests as expected, so it looks like I'm not getting false results. I'm sure reading the code for
+`ComparisonCompactor` will clear that up, but for the moment it's confusing.
+
+The code for `ComparisonCompactor`, as Bob says, is pretty good. I was able to follow it easily and can see why that
+test is: `areStringsEqual()`. I don't know how this class is used in JUint and this seems pretty counter-intuitive, but
+for now I'll take it on faith that this is correct.
+
+The same of course cannot be said for Bob's defactored version, which I'm including in `ComparisonCompactorDefactored`.
+Yes, I'm very happy I don't have to clean that up!
