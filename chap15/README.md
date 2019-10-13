@@ -78,3 +78,6 @@ We're about to undo this, but I'm including it for completeness.
 
 #### better temporal coupling fix with findCommonPrefixAndSuffix()
 And there go the return values I liked. Of course it makes sense though.
+
+#### refactor findCommonPrefixAndSuffix()
+I did this without copy and pasting, and it took me a few tries to get the tests passing.
