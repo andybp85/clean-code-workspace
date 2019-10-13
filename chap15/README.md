@@ -47,3 +47,11 @@ for now I'll take it on faith that this is correct.
 
 The same of course cannot be said for Bob's defactored version, which I'm including in `ComparisonCompactorDefactored`.
 Yes, I'm very happy I don't have to clean that up!
+
+### The Boy Scout Rule
+
+Bob makes a bunch of small changes here, so I'll break this up into commits that make sense.
+
+#### eliminate the f prefixes
+I used IntelliJ's refactoring tool to change the names in the declarations, and low and behold, it inserted `this`
+pointers where they were needed. As a web dev, I have to say that so far the lack of `this`s everywhere has been novel.
