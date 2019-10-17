@@ -87,3 +87,7 @@ Fairly straightforward, although I left a `+ 1` in the first time I ran my tests
 left in `this.suffixLength = suffixLength;` in `findCommonPrefixAndSuffix()`, and it helpfully informed me that the
 assignment is now redundant. I always read what the IDE is suggesting, and I've discovered many cool refactorings by
 reading WebStorm's helpful messages.
+
+#### refactor compactString()
+At first I commented out the `if` statements and their bodies, which failed the test - whoops. Bob means just comment
+the `if`s themselves. The refactor itself is slick!
