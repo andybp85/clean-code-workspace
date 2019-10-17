@@ -81,3 +81,9 @@ And there go the return values I liked. Of course it makes sense though.
 
 #### refactor findCommonPrefixAndSuffix()
 I did this without copy and pasting, and it took me a few tries to get the tests passing.
+
+#### change suffixIndex to suffixLength
+Fairly straightforward, although I left a `+ 1` in the first time I ran my tests. IntelliJ also helped me out, as I had
+left in `this.suffixLength = suffixLength;` in `findCommonPrefixAndSuffix()`, and it helpfully informed me that the
+assignment is now redundant. I always read what the IDE is suggesting, and I've discovered many cool refactorings by
+reading WebStorm's helpful messages.

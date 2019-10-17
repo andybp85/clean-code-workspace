@@ -10,7 +10,7 @@ public class ComparisonCompactor {
     private String expected;
     private String actual;
     private int prefixLength;
-    private int suffixIndex;
+    private int suffixLength;
     private String compactExpected;
     private String compactActual;
 
@@ -43,10 +43,10 @@ public class ComparisonCompactor {
 
     private String compactString(String source) {
         String result = DELTA_START +
-                source.substring(prefixLength, source.length() - suffixIndex + 1) + DELTA_END;
+                source.substring(prefixLength, source.length() - suffixLength) + DELTA_END;
         if (prefixLength > 0)
             result = computeCommonPrefix() + result;
-        if (suffixIndex > 0)
+        if (suffixLength > 0)
             result = result + computeCommonSuffix();
         return result;
     }
@@ -62,22 +62,21 @@ public class ComparisonCompactor {
 
     private void findCommonPrefixAndSuffix() {
         findCommonPrefix();
-        int suffixLength = 1;
+        suffixLength = 0;
         for (; ! suffixOverlapsPrefix(suffixLength); suffixLength++) {
             if (charFromEnd(expected, suffixLength) !=
                     charFromEnd(actual, suffixLength))
                 break;
         }
-        suffixIndex = suffixLength;
     }
 
     private char charFromEnd(String s, int i) {
-        return s.charAt(s.length() - i);
+        return s.charAt(s.length() - i - 1);
     }
 
     private boolean suffixOverlapsPrefix(int suffixLength) {
-        return actual.length() - suffixLength < prefixLength ||
-                expected.length() - suffixLength < prefixLength;
+        return actual.length() - suffixLength <= prefixLength ||
+                expected.length() - suffixLength <= prefixLength;
     }
 
     private String computeCommonPrefix() {
@@ -87,10 +86,10 @@ public class ComparisonCompactor {
     }
 
     private String computeCommonSuffix() {
-        int end = Math.min(expected.length() - suffixIndex + 1 + contextLength,
+        int end = Math.min(expected.length() - suffixLength + contextLength,
                 expected.length());
-        return expected.substring(expected.length() - suffixIndex + 1, end) +
-                (expected.length() - suffixIndex + 1 < expected.length() - contextLength ? ELLIPSIS : "");
+        return expected.substring(expected.length() - suffixLength, end) +
+                (expected.length() - suffixLength < expected.length() - contextLength ? ELLIPSIS : "");
     }
 
     private boolean areStringsEqual() {
