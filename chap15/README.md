@@ -91,3 +91,31 @@ reading WebStorm's helpful messages.
 #### refactor compactString()
 At first I commented out the `if` statements and their bodies, which failed the test - whoops. Bob means just comment
 the `if`s themselves. The refactor itself is slick!
+
+### Final Refactor
+This is obviously pretty huge, and rather than try it myself at first I used one of my favorite tools,
+[quickdiff.com](https://www.quickdiff.com/), to figure it out. I then decided to go back and try from the couple things
+Bob points out at the end, so I copied what I had into Atom and checked out `ComparisonCompactor.java`.
+
+The first one was really cool because after I inlined the methods into `formatCompactedComparison`, IntelliJ offered to
+make `compactExpected` and `compactActual` local variables in it. I went for it, and then it was only a small refactor 
+to make it have only one return statement.
+
+I don't think I would have thought of inverting the sense of `shouldNotBeCompacted()` like that, but it is way clearer
+and only has the one negation. I'll have to keep that in mind. After these two, my tests passed.
+
+I then used another great IntelliJ tool, `Compare with Clipboard`, to compare my current file with what I had in Atom.
+First thing I noticed was the heavy refactor and move of `compactString()` to `compact()` with a few helper methods.
+I used IntelliJ's refactor to change the name, moved it, and then just copy and pasted the body and new methods (first
+time I've ever seen `StringBuilder()`). This resulted in `computeCommonPrefix()` and `computeCommonSuffix()` not being
+used. I see how he took the logic in those two functions and broke it out into the new functions. And now, my tests
+are failing...
+
+I continued using `Compare with Clipboard` and saw that Bob had inlined the `expected.equals(actual)` from
+`areStringsEqual()` into `shouldNotBeCompacted()`, and suddenly the IntelliJ lit the line up. Apparently this condition
+will always result in `false` - oh, I forgot to switch the `&&`s to `||`s! That got my tests passing. There's
+definitely a lesson here in that simpler code is easier for the IDE to check, and letting your tools help you as much
+as possible is one of the best pieces of programming advice I can think of.
+
+After that, I removed the redundant argument in `suffixOverlapsPrefix()`, and with only a couple formatting differences,
+my code matched Uncle Bob's.
