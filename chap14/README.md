@@ -211,7 +211,7 @@ implemented:
 
 ### [ArgsExceptionTest](https://github.com/andybp85/clean-code-workspace/commit/2304d2ae8fadf1c0b767f7a594933b229b96c17c)
 
-Finishing up the tests was pretty painless. I had to add the error messages for double, but this was obvious.`
+Finishing up the tests was pretty painless. I had to add the error messages for double, but this was obvious.
 
 ### [Final Refactor](https://github.com/andybp85/clean-code-workspace/commit/789baaad7fec888db706832d379546a378c15af3)
 
@@ -219,7 +219,7 @@ So I have to admit: Bob says to try the final refactor as an exercise, which I t
 did continuously run the tests while I was doing the refactor, and did figure out a few things myself, but mostly I
 looked at the final version and made the changes in sequence. I do see what Bob had in mind though.
 
-I did hit one snag that took me a while: I couldn't get the drive to run! I finally realized that I had set the command
+I did hit one snag that took me a while: I couldn't get the driver to run! I finally realized that I had set the command
 line args up wrong initially: it should have been `-l -p 10 -d "hello"`. the extra `true` in it was getting parsed as
 arg, which caused the loop in `parseArgumentStrings` to break and resulted in a null pointer exception being thrown
 from the call to `getInt` (since there was no int).

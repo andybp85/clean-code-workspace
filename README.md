@@ -13,7 +13,7 @@ I use Webstorm day-to-day so I'll be using IntelliJ, and I'm familiar with nvm/p
 
 Clean Code is of course a bit dated, jvm-wise; as best I can tell was written in version 5 or 6. I'll be using
 Java8, since it's the oldest LTS release - although there's a big caveat: we can't install 8 via homebrew, because of
-licensing issues (One Rich... yea). So I'm using the openjdk version. As I start this project, I have no idea of the
+licensing issues. So I'm using the openjdk version. As I start this project, I have no idea of the
 implications of this :)
 
 * [jenv](https://github.com/jenv/jenv)
@@ -33,5 +33,3 @@ e.g. `Chap14: Args: The Rough Draft`.
 
 * I'll be using the [The Benjamin Franklin Method of Reading Programming Books](http://www.pathsensitive.com/2018/01/the-benjamin-franklin-method-of-reading.html)
 as much as possible.
-* Why the hell doesn't `ctl+d` do forward delete out of the box? I see it's mapped to `Run debug`, but this breaks
-something I use very often on my MacBook, which is a *tad* inconvenient.

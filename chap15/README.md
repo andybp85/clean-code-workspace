@@ -1,4 +1,4 @@
-# Chapter 15
+# [Chapter 15](https://github.com/andybp85/clean-code-workspace/commit/bd66e8254228947561dd43a99cf043576f7ceb82)
 
 Setup was pretty easy (as long as it proves to be correct)! I made my `chap15` folder, then let IntelliJ make a new
 project called `ComparisonCompactor`, then had IntelliJ make a module in it called `com.cleancode.comparisonCompactor`.
@@ -15,7 +15,7 @@ which is deprecated. I looked around quickly for what the current version would 
 page of a google search. As I've said my goal isn't to learn Java, so since everything runs I'm going to roll with it
 for now. YMMV.
 
-### The JUnit Framework
+### [The JUnit Framework](https://github.com/andybp85/clean-code-workspace/commit/e95436acbd1fd60d28e80d64ea7e854bf6518f7d)
 
 Bob invites us to critique the tests first. IntelliJ only suggests one change: the `assertTrue` in the first test can
 be simplified to `assertEquals()`. The rest of the tests utilize `assertEquals()` and the simplified test passes, so
@@ -52,47 +52,47 @@ Yes, I'm very happy I don't have to clean that up!
 
 Bob makes a bunch of small changes here, so I'll break this up into commits that make sense.
 
-#### eliminate the f prefixes
+#### [eliminate the f prefixes](https://github.com/andybp85/clean-code-workspace/commit/1ef69a905760fc1f9c995f19573c3cd21724402f)
 I used IntelliJ's refactoring tool to change the names in the declarations, and low and behold, it inserted `this`
 pointers where they were needed. As a web dev, I have to say that so far the lack of `this`s everywhere has been novel.
 
-#### unencapsulated conditional
+#### [unencapsulated conditional](https://github.com/andybp85/clean-code-workspace/commit/26556c4ec4211755416ff66456d37ee832ab1035)
 I don't think I've every used the `extract method` tool in WebStorm, so this was the perfect opportunity to give it a
 whirl. It made the exact same method Bob did. Awesome!
 
-#### refactor compact()
+#### [refactor compact()](https://github.com/andybp85/clean-code-workspace/commit/1116e32f340ae3134f69887c254f0eb5af827973)
 I should have had the tests running on changes, but I'll forgot and this was the first time I felt it necessary - good
 thing, because I forgot to change the `||`s to `&&`s the first time.
 
 I really appreciate this refactor. The result of inverting the conditional is something I strive to do in my own code
 day-to-day.
 
-#### change compact() to formatCompactedComparison()
+#### [change compact() to formatCompactedComparison()](https://github.com/andybp85/clean-code-workspace/commit/c62330d023d850038b9f0a0f15d7f8f8834e1d35)
 
-#### change findCommonPrefix() and findCommonSuffix() to use consistent conventions
+#### [change findCommonPrefix() and findCommonSuffix() to use consistent conventions](https://github.com/andybp85/clean-code-workspace/commit/090c5d50b1eacb87a2aea4996fe1f2beec20c6d4)
 This is another one I really like, because it gives the reader a better idea of what the function is doing without
 having to read the definition.
 
-#### fix hidden temporal coupling in findCommonSuffix()
+#### [fix hidden temporal coupling in findCommonSuffix()](https://github.com/andybp85/clean-code-workspace/commit/765da69a15c63f02caf95c473d5752d4fdd52999)
 We're about to undo this, but I'm including it for completeness.
 
-#### better temporal coupling fix with findCommonPrefixAndSuffix()
+#### [better temporal coupling fix with findCommonPrefixAndSuffix()](https://github.com/andybp85/clean-code-workspace/commit/814b58f626389b2397aa05eff3dcf4be7517985f)
 And there go the return values I liked. Of course it makes sense though.
 
-#### refactor findCommonPrefixAndSuffix()
+#### [refactor findCommonPrefixAndSuffix()](https://github.com/andybp85/clean-code-workspace/commit/be7337bc59b6e3dce0340f596a7f4abe722662b7)
 I did this without copy and pasting, and it took me a few tries to get the tests passing.
 
-#### change suffixIndex to suffixLength
+#### [change suffixIndex to suffixLength](https://github.com/andybp85/clean-code-workspace/commit/36bfaa48190bde45026eb84d7854653c98f8b1f3)
 Fairly straightforward, although I left a `+ 1` in the first time I ran my tests. IntelliJ also helped me out, as I had
 left in `this.suffixLength = suffixLength;` in `findCommonPrefixAndSuffix()`, and it helpfully informed me that the
 assignment is now redundant. I always read what the IDE is suggesting, and I've discovered many cool refactorings by
 reading WebStorm's helpful messages.
 
-#### refactor compactString()
+#### [refactor compactString()](https://github.com/andybp85/clean-code-workspace/commit/ece5637568848c51ef3c65237524c3c914b2e75c)
 At first I commented out the `if` statements and their bodies, which failed the test - whoops. Bob means just comment
 the `if`s themselves. The refactor itself is slick!
 
-### Final Refactor
+### [Final Refactor](https://github.com/andybp85/clean-code-workspace/commit/1f8a9c04d9ebcbedff28c1d0aae28ea7a71d8d44)
 This is obviously pretty huge, and rather than try it myself at first I used one of my favorite tools,
 [quickdiff.com](https://www.quickdiff.com/), to figure it out. I then decided to go back and try from the couple things
 Bob points out at the end, so I copied what I had into Atom and checked out `ComparisonCompactor.java`.
